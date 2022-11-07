@@ -37,7 +37,7 @@ const getProductsById = (req, res) => {
       FROM product,
       LATERAL (
         SELECT ARRAY (
-          SELECT json_build_object('feature', feature, 'value', value)
+          SELECT jsonb_build_object('feature', feature, 'value', value)
           FROM features
           WHERE product_id = product.id
         ) AS features
@@ -57,13 +57,13 @@ const getProductsStylesById = (req, res) => {
 
   connection.query(`SELECT id AS style_id, name, original_price, sale_price, default_style AS default, si.photos, so.skus FROM styles, LATERAL (
     SELECT ARRAY (
-      SELECT json_build_object('thumbnail_url', thumbnail_url, 'url', url)
+      SELECT jsonb_build_object('thumbnail_url', thumbnail_url, 'url', url)
       FROM photos
       WHERE "styleId" = styles.id
     ) AS photos
   ) si, LATERAL (
     SELECT ARRAY (
-      SELECT json_build_object(id, ('quantity', quantity, 'size', size))
+      SELECT jsonb_build_object(id, ('quantity', quantity, 'size', size))
       FROM skus
       WHERE "styleId" = styles.id
     ) AS skus
