@@ -1,10 +1,14 @@
 {
   "scripts": {
-    "server": "nodemon api.js"
+    "server": "nodemon api.js",
+    "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "pg": "^8.8.0"
+    "jest": "^29.3.0",
+    "pg": "^8.8.0",
+    "supertest": "^6.3.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
